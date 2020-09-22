@@ -1,4 +1,4 @@
-# sql-query
+# pg-query-string
 
 ```sh
 npm install pg-query-string
@@ -16,7 +16,7 @@ This is essentially squel, however a few changes:
 ```js
 import { Table, Schema } from 'pg-query-string';
 
-const schema = new Schema('public');
+const schema = new Schema('my-schema');
 const table = schema.table('users', {
   id: 'uuid',
   username: 'text',
