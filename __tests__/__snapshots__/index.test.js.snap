@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`delete 1`] = `
+Object {
+  "text": "DELETE FROM students WHERE (id > $1) AND (id < $2) ORDER BY id DESC LIMIT $3",
+  "values": Array [
+    1,
+    100,
+    5,
+  ],
+}
+`;
+
+exports[`insert 1`] = `
+Object {
+  "text": "INSERT INTO users (username, email) VALUES ($1::type1, $2::type2) RETURNING *",
+  "values": Array [
+    "pyramation",
+    "pyramation@gmail.com",
+  ],
+}
+`;
+
+exports[`select 1`] = `
+Object {
+  "text": "SELECT id FROM students WHERE (name = 'Thomas' OR age > 18)",
+  "values": Array [],
+}
+`;
+
+exports[`update 1`] = `
+Object {
+  "text": "UPDATE students SET name = $1::text, age = $2, data = $3::jsonb, score = $4::numeric, graduate = $5::boolean, level = (SELECT MAX(level) FROM levels)",
+  "values": Array [
+    "Fred",
+    29,
+    Object {
+      "a": 1,
+      "b": 2,
+    },
+    1.2,
+    false,
+  ],
+}
+`;
+
+exports[`where 1`] = `
+Object {
+  "text": "SELECT id FROM students WHERE (name = $1 OR age > $2) LIMIT $3",
+  "values": Array [
+    "dude",
+    18,
+    2,
+  ],
+}
+`;
