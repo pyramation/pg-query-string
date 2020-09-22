@@ -1,7 +1,7 @@
 # sql-query
 
 ```sh
-npm install @pyramation/sql-query
+npm install pg-query-string
 ```
 
 Thanks to https://github.com/hiddentao/squel
@@ -14,7 +14,7 @@ This is essentially squel, however a few changes:
 * classes handy for testing
 
 ```js
-import { Table, Schema } from '@pyramation/sql-query';
+import { Table, Schema } from 'pg-query-string';
 
 const schema = new Schema('public');
 const table = schema.table('users', {

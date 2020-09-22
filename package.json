@@ -1,7 +1,7 @@
 {
-  "name": "@pyramation/sql-query",
-  "version": "0.1.0",
-  "description": "sql query",
+  "name": "pg-query-string",
+  "version": "0.1.1",
+  "description": "build PostgreSQL query strings",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/pyramation/sql-query#readme",
   "license": "SEE LICENSE IN LICENSE",
@@ -32,7 +32,10 @@
     "type": "git",
     "url": "https://github.com/pyramation/sql-query"
   },
-  "keywords": [],
+  "keywords": [
+    "postgres",
+    "query"
+  ],
   "bugs": {
     "url": "https://github.com/pyramation/sql-query/issues"
   },
