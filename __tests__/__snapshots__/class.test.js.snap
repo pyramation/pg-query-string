@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`delete via a class 1`] = `
+Object {
+  "text": "DELETE FROM users WHERE (username = $1::text AND email = $2::email)",
+  "values": Array [
+    "pyramation",
+    "pyramation@gmail.com",
+  ],
+}
+`;
+
+exports[`delete via a class 2`] = `
+Object {
+  "text": "DELETE FROM users WHERE (username = $1::text AND email = $2::email) LIMIT $3",
+  "values": Array [
+    "pyramation",
+    "pyramation@gmail.com",
+    2,
+  ],
+}
+`;
+
+exports[`insert via class 1`] = `
+Object {
+  "text": "INSERT INTO users (username, email) VALUES ($1::text, $2::email)",
+  "values": Array [
+    "pyramation",
+    "pyramation@gmail.com",
+  ],
+}
+`;
+
+exports[`select via class 1`] = `
+Object {
+  "text": "SELECT id, email FROM users WHERE (username = $1::text AND email = $2::email)",
+  "values": Array [
+    "pyramation",
+    "pyramation@gmail.com",
+  ],
+}
+`;
+
+exports[`selectOne via class 1`] = `
+Object {
+  "text": "SELECT id, email FROM users WHERE (username = $1::text AND email = $2::email) LIMIT $3",
+  "values": Array [
+    "pyramation",
+    "pyramation@gmail.com",
+    1,
+  ],
+}
+`;
+
+exports[`update many fields via class 1`] = `
+Object {
+  "text": "UPDATE users SET email = $1::email, username = $2::text, active = $3::boolean, password = $4::password, avatar = $5, github = $6::githublink, launchql = $7, facebook = $8::fblink, myspace = $9::myslink, tags = $10 WHERE (email = $11::email)",
+  "values": Array [
+    "cheerios@gmail.com",
+    "pyramation",
+    true,
+    "secure",
+    "http://some.link",
+    "pyramation",
+    "yes",
+    "danlynch",
+    "forgot",
+    "pyramation",
+    "pyramation@gmail.com",
+  ],
+}
+`;
+
+exports[`update via class 1`] = `
+Object {
+  "text": "UPDATE users SET username = $1::text, email = $2::email WHERE (email = $3::email)",
+  "values": Array [
+    "pyramation",
+    "pyramation@gmail.com",
+    "pyramation@gmail.com",
+  ],
+}
+`;

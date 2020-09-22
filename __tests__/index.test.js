@@ -1,5 +1,20 @@
 import squel from '../src';
-import cases from 'jest-in-case';
+
+it('select', () => {
+  expect(
+    squel
+      .select()
+      .field('id')
+      .from('students')
+      .where(
+        squel
+          .expr()
+          .and("name = 'Thomas'")
+          .or('age > 18')
+      )
+      .toParam()
+  ).toMatchSnapshot();
+});
 
 it('insert', () => {
   expect(
@@ -29,22 +44,6 @@ it('update', () => {
           .select()
           .field('MAX(level)')
           .from('levels')
-      )
-      .toParam()
-  ).toMatchSnapshot();
-});
-
-it('select', () => {
-  expect(
-    squel
-      .select()
-      .field('id')
-      .from('students')
-      .where(
-        squel
-          .expr()
-          .and("name = 'Thomas'")
-          .or('age > 18')
       )
       .toParam()
   ).toMatchSnapshot();
