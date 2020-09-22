@@ -1,8 +1,25 @@
 import squel from './squel';
+import escape from 'pg-escape';
+
+export class Schema {
+  constructor(name) {
+    this.name = name;
+  }
+  table(name, structure) {
+    return new Table(name, structure, this.name);
+  }
+}
 
 export class Table {
-  constructor(name, structure = {}) {
+  constructor(name, structure = {}, schema) {
+    if (name.includes('.')) {
+      const parts = name.split('.');
+      name = parts[1];
+      schema = parts[0];
+    }
     this.name = name;
+    this.qualified = schema ? escape('%I.%I', schema, name) : name;
+
     this.structure = structure;
   }
   insert(opts) {
@@ -13,7 +30,7 @@ export class Table {
       } else {
         return m.set(field, value);
       }
-    }, squel.insert().into(this.name));
+    }, squel.insert().into(this.qualified));
     return builder.toParam();
   }
   update(fields, condition = {}) {
@@ -30,7 +47,7 @@ export class Table {
       } else {
         return m.set(field, value);
       }
-    }, squel.update().table(this.name));
+    }, squel.update().table(this.qualified));
 
     const entries = Object.entries(condition);
     if (!entries.length) return builder.toParam();
@@ -66,7 +83,7 @@ export class Table {
     const selection = fields.reduce((m, v) => {
       if (v === '*') return m;
       return m.field(v);
-    }, squel.select().from(this.name));
+    }, squel.select().from(this.qualified));
 
     const entries = Object.entries(opts);
 
@@ -103,7 +120,7 @@ export class Table {
     };
   }
   delete(opts = {}, limit = 0) {
-    const deletion = squel.delete().from(this.name);
+    const deletion = squel.delete().from(this.qualified);
 
     const entries = Object.entries(opts);
 

@@ -21,7 +21,7 @@ Object {
 }
 `;
 
-exports[`insert via class 1`] = `
+exports[`insert 1`] = `
 Object {
   "text": "INSERT INTO users (username, email) VALUES ($1::text, $2::email)",
   "values": Array [
@@ -31,7 +31,7 @@ Object {
 }
 `;
 
-exports[`select via class 1`] = `
+exports[`select 1`] = `
 Object {
   "text": "SELECT id, email FROM users WHERE (username = $1::text AND email = $2::email)",
   "values": Array [
@@ -41,7 +41,27 @@ Object {
 }
 `;
 
-exports[`selectOne via class 1`] = `
+exports[`select 2`] = `
+Object {
+  "text": "SELECT id, email FROM myschema.users WHERE (username = $1 AND email = $2)",
+  "values": Array [
+    "pyramation",
+    "pyramation@gmail.com",
+  ],
+}
+`;
+
+exports[`select 3`] = `
+Object {
+  "text": "SELECT id, email FROM \\"my-schema\\".users WHERE (username = $1 AND email = $2)",
+  "values": Array [
+    "pyramation",
+    "pyramation@gmail.com",
+  ],
+}
+`;
+
+exports[`selectOne 1`] = `
 Object {
   "text": "SELECT id, email FROM users WHERE (username = $1::text AND email = $2::email) LIMIT $3",
   "values": Array [
@@ -52,7 +72,41 @@ Object {
 }
 `;
 
-exports[`update many fields via class 1`] = `
+exports[`selectOne by id 1`] = `
+Object {
+  "text": "SELECT * FROM users WHERE (id = $1::uuid) LIMIT $2",
+  "values": Array [
+    "boom",
+    1,
+  ],
+}
+`;
+
+exports[`test 1`] = `
+Object {
+  "text": "UPDATE public.users SET active = $1::boolean, tags = ($2::text[]) WHERE (id = $3::uuid)",
+  "values": Array [
+    true,
+    Array [
+      "pyramation",
+    ],
+    1,
+  ],
+}
+`;
+
+exports[`update 1`] = `
+Object {
+  "text": "UPDATE users SET username = $1::text, email = $2::email WHERE (email = $3::email)",
+  "values": Array [
+    "pyramation",
+    "pyramation@gmail.com",
+    "pyramation@gmail.com",
+  ],
+}
+`;
+
+exports[`update many fields 1`] = `
 Object {
   "text": "UPDATE users SET email = $1::email, username = $2::text, active = $3::boolean, password = $4::password, avatar = $5, github = $6::githublink, launchql = $7, facebook = $8::fblink, myspace = $9::myslink, tags = $10 WHERE (email = $11::email)",
   "values": Array [
@@ -66,17 +120,6 @@ Object {
     "danlynch",
     "forgot",
     "pyramation",
-    "pyramation@gmail.com",
-  ],
-}
-`;
-
-exports[`update via class 1`] = `
-Object {
-  "text": "UPDATE users SET username = $1::text, email = $2::email WHERE (email = $3::email)",
-  "values": Array [
-    "pyramation",
-    "pyramation@gmail.com",
     "pyramation@gmail.com",
   ],
 }

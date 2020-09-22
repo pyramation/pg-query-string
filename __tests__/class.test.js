@@ -1,4 +1,4 @@
-import { Table } from '../src';
+import { Table, Schema } from '../src';
 import cases from 'jest-in-case';
 
 const table = new Table('users', {
@@ -12,16 +12,33 @@ const table = new Table('users', {
   myspace: 'myslink'
 });
 
-it('select via class', () => {
+const schema1 = new Schema('myschema');
+const schema2 = new Schema('my-schema');
+const table2 = schema1.table('users');
+const table3 = schema2.table('users');
+
+it('select', () => {
   expect(
     table.select(['id', 'email'], {
       username: 'pyramation',
       email: 'pyramation@gmail.com'
     })
   ).toMatchSnapshot();
+  expect(
+    table2.select(['id', 'email'], {
+      username: 'pyramation',
+      email: 'pyramation@gmail.com'
+    })
+  ).toMatchSnapshot();
+  expect(
+    table3.select(['id', 'email'], {
+      username: 'pyramation',
+      email: 'pyramation@gmail.com'
+    })
+  ).toMatchSnapshot();
 });
 
-it('selectOne via class', () => {
+it('selectOne', () => {
   expect(
     table.selectOne(['id', 'email'], {
       username: 'pyramation',
@@ -30,12 +47,20 @@ it('selectOne via class', () => {
   ).toMatchSnapshot();
 });
 
-it('insert via class', () => {
+it('selectOne by id', () => {
+  expect(
+    table.selectOne([], {
+      id: 'boom'
+    })
+  ).toMatchSnapshot();
+});
+
+it('insert', () => {
   expect(
     table.insert({ username: 'pyramation', email: 'pyramation@gmail.com' })
   ).toMatchSnapshot();
 });
-it('update via class', () => {
+it('update', () => {
   expect(
     table.update(
       {
@@ -49,7 +74,7 @@ it('update via class', () => {
   ).toMatchSnapshot();
 });
 
-it('update many fields via class', () => {
+it('update many fields', () => {
   expect(
     table.update(
       {
@@ -77,5 +102,29 @@ it('delete via a class', () => {
   ).toMatchSnapshot();
   expect(
     table.delete({ username: 'pyramation', email: 'pyramation@gmail.com' }, 2)
+  ).toMatchSnapshot();
+});
+
+it('test', () => {
+  const schema = new Schema('public');
+  const table = schema.table('users', {
+    id: 'uuid',
+    username: 'text',
+    email: 'email',
+    password: 'password',
+    active: 'boolean',
+    tags: 'text[]'
+  });
+
+  expect(
+    table.update(
+      {
+        active: true,
+        tags: ['pyramation']
+      },
+      {
+        id: 1
+      }
+    )
   ).toMatchSnapshot();
 });
