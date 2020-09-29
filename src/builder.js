@@ -22,7 +22,7 @@ export class Table {
 
     this.structure = structure;
   }
-  insert(opts) {
+  insert(opts, returning = ['*']) {
     const builder = Object.entries(opts).reduce((m, v) => {
       const [field, value] = v;
       if (this.structure[field]) {
@@ -31,6 +31,9 @@ export class Table {
         return m.set(field, value);
       }
     }, squel.insert().into(this.qualified));
+    if (returning && returning.length) {
+      return builder.returning(returning.join(',')).toParam();
+    }
     return builder.toParam();
   }
   update(fields, condition = {}) {

@@ -1,6 +1,6 @@
 {
   "name": "pg-query-string",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "build PostgreSQL query strings",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/pyramation/sql-query#readme",

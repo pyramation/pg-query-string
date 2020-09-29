@@ -59,6 +59,18 @@ it('insert', () => {
   expect(
     table.insert({ username: 'pyramation', email: 'pyramation@gmail.com' })
   ).toMatchSnapshot();
+  expect(
+    table.insert(
+      { username: 'pyramation', email: 'pyramation@gmail.com' },
+      false
+    )
+  ).toMatchSnapshot();
+  expect(
+    table.insert({ username: 'pyramation', email: 'pyramation@gmail.com' }, [
+      'id',
+      'username'
+    ])
+  ).toMatchSnapshot();
 });
 it('update', () => {
   expect(

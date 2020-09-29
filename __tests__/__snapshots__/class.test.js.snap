@@ -23,7 +23,27 @@ Object {
 
 exports[`insert 1`] = `
 Object {
+  "text": "INSERT INTO users (username, email) VALUES ($1::text, $2::email) RETURNING *",
+  "values": Array [
+    "pyramation",
+    "pyramation@gmail.com",
+  ],
+}
+`;
+
+exports[`insert 2`] = `
+Object {
   "text": "INSERT INTO users (username, email) VALUES ($1::text, $2::email)",
+  "values": Array [
+    "pyramation",
+    "pyramation@gmail.com",
+  ],
+}
+`;
+
+exports[`insert 3`] = `
+Object {
+  "text": "INSERT INTO users (username, email) VALUES ($1::text, $2::email) RETURNING id,username",
   "values": Array [
     "pyramation",
     "pyramation@gmail.com",
