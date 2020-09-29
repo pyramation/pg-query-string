@@ -20,13 +20,23 @@ export class Table {
     this.name = name;
     this.qualified = schema ? escape('%I.%I', schema, name) : name;
 
-    this.structure = structure;
+    this.structure = Object.entries(structure).reduce((m, [k, v]) => {
+      m[k] = {
+        type: v,
+        isArray: v.replace(/[\s]/g, '').endsWith('[]')
+      };
+      return m;
+    }, {});
   }
   insert(opts, returning = ['*']) {
     const builder = Object.entries(opts).reduce((m, v) => {
       const [field, value] = v;
       if (this.structure[field]) {
-        return m.set(field, value, this.structure[field]);
+        if (this.structure[field].isArray) {
+          return m.set(field, [value], this.structure[field].type);
+        } else {
+          return m.set(field, value, this.structure[field].type);
+        }
       } else {
         return m.set(field, value);
       }
@@ -42,11 +52,11 @@ export class Table {
 
     const builder = Object.entries(fields).reduce((m, v) => {
       const [field, value] = v;
-      casts.push(this.structure[field]);
+      casts.push(this.structure[field]?.type);
       values.push(value);
 
       if (this.structure[field]) {
-        return m.set(field, value, this.structure[field]);
+        return m.set(field, value, this.structure[field].type);
       } else {
         return m.set(field, value);
       }
@@ -57,7 +67,7 @@ export class Table {
 
     const where = entries.reduce((m, v) => {
       const [field, value] = v;
-      casts.push(this.structure[field]);
+      casts.push(this.structure[field]?.type);
       values.push(value);
       return m.and(`${field} = ?`);
     }, squel.expr());
@@ -99,7 +109,7 @@ export class Table {
 
     const where = entries.reduce((m, v) => {
       const [field, value] = v;
-      casts.push(this.structure[field]);
+      casts.push(this.structure[field]?.type);
       values.push(value);
       return m.and(`${field} = ?`);
     }, squel.expr());
@@ -136,7 +146,7 @@ export class Table {
 
     const where = entries.reduce((m, v) => {
       const [field, value] = v;
-      casts.push(this.structure[field]);
+      casts.push(this.structure[field]?.type);
       values.push(value);
       return m.and(`${field} = ?`);
     }, squel.expr());

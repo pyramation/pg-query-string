@@ -9,7 +9,8 @@ const table = new Table('users', {
   active: 'boolean',
   github: 'githublink',
   facebook: 'fblink',
-  myspace: 'myslink'
+  myspace: 'myslink',
+  friend_ids: 'uuid[]'
 });
 
 const schema1 = new Schema('myschema');
@@ -70,6 +71,16 @@ it('insert', () => {
       'id',
       'username'
     ])
+  ).toMatchSnapshot();
+  expect(
+    table.insert(
+      {
+        username: 'pyramation',
+        email: 'pyramation@gmail.com',
+        friend_ids: ['a', 'b']
+      },
+      ['id', 'username']
+    )
   ).toMatchSnapshot();
 });
 it('update', () => {

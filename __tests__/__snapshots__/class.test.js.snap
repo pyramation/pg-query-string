@@ -51,6 +51,20 @@ Object {
 }
 `;
 
+exports[`insert 4`] = `
+Object {
+  "text": "INSERT INTO users (username, email, friend_ids) VALUES ($1::text, $2::email, ($3::uuid[])) RETURNING id,username",
+  "values": Array [
+    "pyramation",
+    "pyramation@gmail.com",
+    Array [
+      "a",
+      "b",
+    ],
+  ],
+}
+`;
+
 exports[`select 1`] = `
 Object {
   "text": "SELECT id, email FROM users WHERE (username = $1::text AND email = $2::email)",
