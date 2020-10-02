@@ -13,7 +13,7 @@ export class Query {
     if (!this.type) {
       return await this.client.query(asParamsObj);
     } else {
-      return await this.client.any(asParamsObj.type, asParamsObj.values);
+      return await this.client.any(asParamsObj.text, asParamsObj.values);
     }
   }
 }
@@ -212,6 +212,10 @@ export class Func {
   call(fields = [], params) {
     if (!Array.isArray(fields)) {
       params = fields;
+      fields = [];
+    }
+    if (!params && !fields.length) {
+      params = {};
       fields = [];
     }
 
