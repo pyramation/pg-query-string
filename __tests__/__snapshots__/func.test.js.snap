@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`select 1`] = `
+Object {
+  "text": "SELECT id, email FROM add_tags($1::text,$2::text[])",
+  "values": Array [
+    "pyramation",
+    Array [
+      "pyramation@gmail.com",
+    ],
+  ],
+}
+`;
+
+exports[`select 2`] = `
+Object {
+  "text": "SELECT * FROM add_tags($1::text,$2::text[])",
+  "values": Array [
+    "pyramation",
+    Array [
+      "pyramation@gmail.com",
+    ],
+  ],
+}
+`;
+
+exports[`select 3`] = `
+Object {
+  "text": "SELECT * FROM add_tags($1::text,$2::text[])",
+  "values": Array [
+    "pyramation",
+    Array [
+      "pyramation@gmail.com",
+    ],
+  ],
+}
+`;
+
+exports[`select 4`] = `
+Object {
+  "text": "SELECT * FROM add_tags($1::text,$2::text[])",
+  "values": Array [
+    "pyramation",
+    Array [
+      "pyramation@gmail.com",
+    ],
+  ],
+}
+`;

@@ -1,4 +1,4 @@
-# pg-query-string
+# pg-query-string [![Build Status](https://travis-ci.org/pyramation/pg-query-string.svg?branch=master)](https://travis-ci.org/pyramation/pg-query-string)
 
 ```sh
 npm install pg-query-string
